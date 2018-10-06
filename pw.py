@@ -16,3 +16,9 @@ if len(sys.argv) < 2:
     sys.exit()
 
 account = sys.argv[1]           # 最初のコマンドライン引数がアカウント名
+
+if account in PASSWORDS:
+    pyperclip.copy(PASSWORDS[account])
+    print(account + 'のパスワードをクリップボードにコピーしました')
+else:
+    print(account + 'というアカウント名はありません')
