@@ -23,5 +23,15 @@ email_regex = re.compile(r'''(
                       )''', re.VERBOSE)
 
 # TODO: クリップボードのテキストを検索する。
+text = str(pyperclip.paste())
+mathes = []
+for groups in phone_regex.findall(text):
+    phone_num = '_'.join([groups[1], groups[3], groups[5]])
+    if groups[8] != '':
+        phone_num += ' x' + groups[8]
+    mathes.append(phone_num)
+for groups in email_regex.findall(text):
+    mathes.append(groups[0])
 
-# TODO: 検索結果を苦リプボードに張り付ける。
+
+# TODO: 検索結果をクリップボードに張り付ける。
