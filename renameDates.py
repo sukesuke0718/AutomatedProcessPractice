@@ -11,9 +11,10 @@ date_pattern = re.compile(r"""^(.*?)                   # 日付の前の全テ�
                                 (.*?)$                  # 日付の後の全テキスト
                             """, re.VERBOSE)
 
-path = r'C:\Users\ユウスケ\PycharmProjects\untitled1\AutomatedProcessPractice\Test'
+# ファイル名を指定
+path = r''
 
-# カレントディレクトリの全ファイルをループする
+# 指定ディレクトリの全ファイルをループする
 for amer_filename in os.listdir(path):
     mo = date_pattern.search(amer_filename)
 
