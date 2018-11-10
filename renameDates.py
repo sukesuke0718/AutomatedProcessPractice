@@ -6,13 +6,15 @@ import shutil, os, re
 # 米国式日付のファイル名にマッチする正規表現を作る
 date_pattern = re.compile(r"""^(.*?)                   # 日付の前の全テキスト
                                 ((0|1)?\d)-            # 月を表す1,2桁の数字
-                                ((0|1|3)?\d)-          # 日を表す1,2桁の数字
-                                ((19|20)\d\d)-         # 年を表す4桁の数字
+                                ((0|1|2|3)?\d)-          # 日を表す1,2桁の数字
+                                ((19|20)\d\d)         # 年を表す4桁の数字
                                 (.*?)$                  # 日付の後の全テキスト
                             """, re.VERBOSE)
 
+path = r'C:\Users\ユウスケ\PycharmProjects\untitled1\AutomatedProcessPractice\Test'
+
 # カレントディレクトリの全ファイルをループする
-for amer_filename in os.listdir('.'):
+for amer_filename in os.listdir(path):
     mo = date_pattern.search(amer_filename)
 
     # 日付のないファイルをスキップする
@@ -27,7 +29,7 @@ for amer_filename in os.listdir('.'):
     after_part  = mo.group(8)
 
     # 欧州式の日付ファイル名を作る
-    euro_filename = before_part + day_part + '-' + month_part + '-' + '-' + year_part + after_part
+    euro_filename = before_part + day_part + '-' + month_part + '-' + year_part + after_part
 
     # ファイル名を変更する
     print('Renameing "{}" to "{} ..."'.format(amer_filename, euro_filename))
