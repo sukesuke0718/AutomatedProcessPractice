@@ -19,10 +19,22 @@ def backup_to_zip(folder):
 
     # ZIPファイルを作成する
     print('Creating {} ...'.format(zip_filename))
-    backup_zip = zipfile.ZipFile(zip_filename, 'w')
+    backup_zip = zipfile.ZipFile(zip_filename, 'w')         # 書き込みモード
 
-    # TODO; フォルダーのツリーを渡り歩いてその中のファイルを圧縮する
+    # フォルダーのツリーを渡り歩いてその中のファイルを圧縮する
+    for foldername, subfolders, filenames in os.walk(folder):
+        print('Adding files in {} ...'.format(foldername))
+        # 現在のフォルダをZIPファイルに追加する
+        backup_zip.write(foldername)
+        # 現在のフォルダの中の全ファイルをZIPファイルに追加する
+        for filename in filenames:
+            new_base = os.path.basename(foldername) + '_'
+            if filename.startswith(new_base) and filename.endswith('.zip'):
+                continue    # バックアップ用ZIPファイルはバックアップしない
+            backup_zip.write(os.path.join(foldername, filename))
+    backup_zip.close()
+
     print('Done.')
 
-
+# バックアップ処理を実行
 backup_to_zip(r'')
